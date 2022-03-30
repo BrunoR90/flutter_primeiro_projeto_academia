@@ -2,13 +2,16 @@
 
 import 'package:flutter/material.dart';
 
-enum PopupMenuPages {   // Tipo da page/ valor da mesma.
+enum PopupMenuPages {   // Tipo da page/ valor da mesma (enum).
   container,
   rows_columns,
   media_query,
   botoes_rotacao_texto,
   scrolls_single_child,
   scrolls_list_view,
+  dialogs,
+  snackbars,
+  forms,
 
 }
 
@@ -42,6 +45,15 @@ class HomePage extends StatelessWidget {
                break;
             case PopupMenuPages.scrolls_list_view:
                Navigator.of(context).pushNamed('/scrolls/list_view');
+               break;
+            case PopupMenuPages.dialogs:
+               Navigator.of(context).pushNamed('/dialogs');
+               break;
+            case PopupMenuPages.snackbars:
+               Navigator.of(context).pushNamed('/snackbars');
+               break;
+            case PopupMenuPages.forms:
+               Navigator.of(context).pushNamed('/forms');
                break;
            } 
 
@@ -78,6 +90,18 @@ class HomePage extends StatelessWidget {
               value: PopupMenuPages.scrolls_list_view,
               child: Text('Scroll ListView'),         // Acaba aqui.
             ),
+            const PopupMenuItem <PopupMenuPages>(   // Aqui se cria outro botão para o "Button".
+              value: PopupMenuPages.dialogs,
+              child: Text('Dialogs'),         // Acaba aqui.
+            ),
+            const PopupMenuItem <PopupMenuPages>(   // Aqui se cria outro botão para o "Button".
+              value: PopupMenuPages.snackbars,
+              child: Text('Snackbars'),        // Acaba aqui.
+            ),
+            const PopupMenuItem <PopupMenuPages>(   // Aqui se cria outro botão para o "Button".
+              value: PopupMenuPages.forms,
+              child: Text('Forms'),       // Acaba aqui.
+            ),
 
           ];
         },
@@ -85,19 +109,59 @@ class HomePage extends StatelessWidget {
       ],
       
       ),
-      body: Container(      // Exemplo de quando se necessita utilizar a nagevação e retonar algo
-        child: TextButton(
-          onPressed: () async {
-            print('Antes de navegar para a pagina detalhe 2');
-            final retorno = await Navigator.of(context).pushNamed('/detalhe2');
-         await Navigator.of(context).pushNamed('/detalhe2');
-         print('Navegou para a pagina detalhe 2');
-         print('O retorno de detalhe 2 é $retorno');
-        },
-        child: const Text('Ir para a pagina Detalhe2 e aguardar'),
+      body: Theme(
+        data: Theme.of(context).copyWith(
+          primaryColor: Colors.blueGrey,
+        ),
+      child: Center(
+        child: Column(
+          children: [
+            Container(      // Exemplo de quando se necessita utilizar a nagevação e retonar algo.
+              child: TextButton(
+                onPressed: () async {
+                  print('Antes de navegar para a pagina detalhe 2');
+                  final retorno = await Navigator.of(context).pushNamed('/detalhe2');
+               await Navigator.of(context).pushNamed('/detalhe2');
+               print('Navegou para a pagina detalhe 2');
+               print('O retorno de detalhe 2 é $retorno');
+              },
+              child: const Text('Ir para a pagina Detalhe2 e aguardar'),
+              ),
+            ),
+            
+            Container(
+              child: Column(
+                children: [
+                  ElevatedButton(
+                    onPressed: () {}, 
+                    child: const Text('Botão X'
+                  ),
+                  ),
+                  const ContainerX(),
+                  TextButton(onPressed: () {}, child: const Text('Teste',
+                  ),
+                  )
+                ],
+              ) ,
+            ),
+          ],
         ),
       ),
+      ),
       
+    );
+  }
+}
+
+class ContainerX extends StatelessWidget {
+  const ContainerX({ Key? key }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+            height: 100,
+            width: 100,
+            color: Theme.of(context).primaryColor,  // Container trazendo a sua cor da primary color definida previamente no Theme da main.dart, porém, pode também ser trazida customizada aqui mesmo na página, como pode-se notar no "body: Theme..." aqui nessa página.
     );
   }
 }

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_primeiro_projeto/pages/dialogs/dialogs_page.dart';
+import 'package:flutter_primeiro_projeto/pages/forms/forms_page.dart';
 import 'package:flutter_primeiro_projeto/pages/rows_columns/rows_column_page.dart';
 import 'package:flutter_primeiro_projeto/pages/scrolls/listview_page.dart';
 import 'package:flutter_primeiro_projeto/pages/scrolls/singlechildscrollview_page.dart';
+import 'package:flutter_primeiro_projeto/pages/snackbar/snackbar_page.dart';
 
 import 'pages/botoes_rotacao_texto/botoes_rotacao_texto_page.dart';
 import 'pages/container/container_page.dart';
@@ -23,8 +26,22 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         
-        
+        primaryColor: Colors.amber,
+        primaryColorLight: Colors.red,
+        primaryColorDark: Colors.amberAccent,
         primarySwatch: Colors.blue,
+        fontFamily: 'Roboto',
+        textButtonTheme: TextButtonThemeData(
+          style: TextButton.styleFrom(
+            primary: Colors.deepOrange
+          ), 
+          ),
+
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            primary: Colors.green,
+          ), 
+          ),
       ),
       
     routes: {
@@ -36,6 +53,9 @@ class MyApp extends StatelessWidget {
       '/botoes_rotacao_texto': (_) => const BotoesRotacaoTextoPage(),
       '/scrolls/single_child': (_) => const SinglechildscrollviewPage(),
       '/scrolls/list_view': (_) => const ListviewPage(),
+      '/dialogs': (_) => const DialogsPage(),
+      '/snackbars': (_) => const SnackBarPage(),
+      '/forms': (_) => const FormsPage(),
     },
 
     );
